@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<index version="1" name="Reasonate">
+  <category name="AI voice tools">
+    <reapack name="reasonate.lua" type="script" desc="Reasonate - AI voice tools (TTS, voice replacement, dubbing, repair, SFX and music)">
+      <metadata>
+        <description><![CDATA[
+AI audio production toolkit for REAPER built on the ElevenLabs API:
+text to speech (single voice and multi-speaker dialogue), voice
+replacement on recorded takes, dubbing into other languages, word-level
+repair of recordings, and sound effects / music generation - all
+non-destructive, all inside REAPER.
+
+Requires ReaImGui 0.10+ (via ReaPack), the SWS extension (in-app
+previews) and your own ElevenLabs API key. Optional: an LLM API key
+for dubbing translation and scene analysis. By falami.studio (b4s1c), MIT.
+]]></description>
+        <link rel="website">https://falami.studio</link>
+        <link rel="donation">https://ko-fi.com/quickmd</link>
+      </metadata>
+      <version name="1.0.0" author="falami.studio (b4s1c)" time="2026-07-12T02:21:46+02:00">
+        <changelog><![CDATA[Initial public release: five modes (TTS, Voice Replacement, Dubbing, Repair, SFX and Music), cast registry, deterministic cache, Windows/macOS/Linux workers.]]></changelog>
+        <source file="_dump_pext.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/_dump_pext.lua</source>
+        <source main="main" file="_phase0_check.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/_phase0_check.lua</source>
+        <source file="_set_item_status.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/_set_item_status.lua</source>
+        <source file="assets/fonts/Inter-Regular.ttf">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/assets/fonts/Inter-Regular.ttf</source>
+        <source file="assets/fonts/Inter-SemiBold.ttf">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/assets/fonts/Inter-SemiBold.ttf</source>
+        <source file="assets/fonts/OFL.txt">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/assets/fonts/OFL.txt</source>
+        <source file="modules/activity.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/activity.lua</source>
+        <source file="modules/api.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/api.lua</source>
+        <source file="modules/async_op.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/async_op.lua</source>
+        <source file="modules/audio_accessor.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/audio_accessor.lua</source>
+        <source file="modules/audio_concat.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/audio_concat.lua</source>
+        <source file="modules/audio_render.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/audio_render.lua</source>
+        <source file="modules/audio_tags.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/audio_tags.lua</source>
+        <source file="modules/cache.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/cache.lua</source>
+        <source file="modules/cast.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/cast.lua</source>
+        <source file="modules/cast_registry.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/cast_registry.lua</source>
+        <source file="modules/colors.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/colors.lua</source>
+        <source file="modules/config.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/config.lua</source>
+        <source file="modules/dialogue_script.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/dialogue_script.lua</source>
+        <source file="modules/dubbing_chunker.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/dubbing_chunker.lua</source>
+        <source file="modules/dubbing_project.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/dubbing_project.lua</source>
+        <source file="modules/dubbing_splicer.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/dubbing_splicer.lua</source>
+        <source file="modules/dubbing_state.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/dubbing_state.lua</source>
+        <source file="modules/forced_align.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/forced_align.lua</source>
+        <source file="modules/gui/action_band.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/action_band.lua</source>
+        <source file="modules/gui/audition_strip.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/audition_strip.lua</source>
+        <source file="modules/gui/batch_dialog.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/batch_dialog.lua</source>
+        <source file="modules/gui/cast_manager.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/cast_manager.lua</source>
+        <source file="modules/gui/dubbing_context.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_context.lua</source>
+        <source file="modules/gui/dubbing_glossary.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_glossary.lua</source>
+        <source file="modules/gui/dubbing_inspector.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_inspector.lua</source>
+        <source file="modules/gui/dubbing_panel.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_panel.lua</source>
+        <source file="modules/gui/dubbing_similar_picker.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_similar_picker.lua</source>
+        <source file="modules/gui/dubbing_speaker_match.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_speaker_match.lua</source>
+        <source file="modules/gui/dubbing_voice_design.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_voice_design.lua</source>
+        <source file="modules/gui/dubbing_voice_settings.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/dubbing_voice_settings.lua</source>
+        <source file="modules/gui/footer.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/footer.lua</source>
+        <source file="modules/gui/header_bar.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/header_bar.lua</source>
+        <source file="modules/gui/mode_selector.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/mode_selector.lua</source>
+        <source file="modules/gui/mode_tabs.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/mode_tabs.lua</source>
+        <source file="modules/gui/repair_panel.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/repair_panel.lua</source>
+        <source file="modules/gui/settings_dialog.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/settings_dialog.lua</source>
+        <source file="modules/gui/sfx_panel.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/sfx_panel.lua</source>
+        <source file="modules/gui/speaker_picker.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/speaker_picker.lua</source>
+        <source file="modules/gui/stats_strip.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/stats_strip.lua</source>
+        <source file="modules/gui/track_color_popup.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/track_color_popup.lua</source>
+        <source file="modules/gui/tracks_table.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/tracks_table.lua</source>
+        <source file="modules/gui/tts_dialogue_panel.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/tts_dialogue_panel.lua</source>
+        <source file="modules/gui/tts_panel.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/tts_panel.lua</source>
+        <source file="modules/gui/variants_dialog.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/variants_dialog.lua</source>
+        <source file="modules/gui/voice_library.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/voice_library.lua</source>
+        <source file="modules/gui/voice_manager.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/voice_manager.lua</source>
+        <source file="modules/gui/voice_picker.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/voice_picker.lua</source>
+        <source file="modules/gui/voice_settings_dialog.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/gui/voice_settings_dialog.lua</source>
+        <source file="modules/housekeeping.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/housekeeping.lua</source>
+        <source file="modules/importer.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/importer.lua</source>
+        <source file="modules/job_manager.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/job_manager.lua</source>
+        <source file="modules/lib/json.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/lib/json.lua</source>
+        <source file="modules/llm.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/llm.lua</source>
+        <source file="modules/llm/anthropic.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/llm/anthropic.lua</source>
+        <source file="modules/llm/deepseek.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/llm/deepseek.lua</source>
+        <source file="modules/llm/gemini.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/llm/gemini.lua</source>
+        <source file="modules/llm/grok.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/llm/grok.lua</source>
+        <source file="modules/llm/mistral.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/llm/mistral.lua</source>
+        <source file="modules/llm/openai.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/llm/openai.lua</source>
+        <source file="modules/migration.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/migration.lua</source>
+        <source file="modules/modes/dubbing.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/modes/dubbing.lua</source>
+        <source file="modules/modes/repair.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/modes/repair.lua</source>
+        <source file="modules/modes/sfx.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/modes/sfx.lua</source>
+        <source file="modules/modes/tts.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/modes/tts.lua</source>
+        <source file="modules/modes/voice_replacement.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/modes/voice_replacement.lua</source>
+        <source file="modules/preview.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/preview.lua</source>
+        <source file="modules/reaper_helpers.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/reaper_helpers.lua</source>
+        <source file="modules/recording.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/recording.lua</source>
+        <source file="modules/repair_splicer.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/repair_splicer.lua</source>
+        <source file="modules/state.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/state.lua</source>
+        <source file="modules/stt.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/stt.lua</source>
+        <source file="modules/tempo_math.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/tempo_math.lua</source>
+        <source file="modules/theme.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/theme.lua</source>
+        <source file="modules/transcript.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/transcript.lua</source>
+        <source file="modules/tts.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/tts.lua</source>
+        <source file="modules/tts_enhance.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/tts_enhance.lua</source>
+        <source file="modules/update_check.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/update_check.lua</source>
+        <source file="modules/util.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/util.lua</source>
+        <source file="modules/voice_admin.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/voice_admin.lua</source>
+        <source file="modules/voice_clone.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/voice_clone.lua</source>
+        <source file="modules/voice_isolator.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/modules/voice_isolator.lua</source>
+        <source main="main" file="reasonate.lua">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/reasonate.lua</source>
+        <source file="workers/run_hidden.vbs">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/run_hidden.vbs</source>
+        <source file="workers/worker.ps1">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker.ps1</source>
+        <source file="workers/worker.sh">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker.sh</source>
+        <source file="workers/worker_forced_align.ps1">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_forced_align.ps1</source>
+        <source file="workers/worker_forced_align.sh">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_forced_align.sh</source>
+        <source file="workers/worker_llm.ps1">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_llm.ps1</source>
+        <source file="workers/worker_llm.sh">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_llm.sh</source>
+        <source file="workers/worker_llm_test.ps1">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_llm_test.ps1</source>
+        <source file="workers/worker_llm_test.sh">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_llm_test.sh</source>
+        <source file="workers/worker_stt.ps1">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_stt.ps1</source>
+        <source file="workers/worker_stt.sh">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_stt.sh</source>
+        <source file="workers/worker_update.ps1">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_update.ps1</source>
+        <source file="workers/worker_update.sh">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_update.sh</source>
+        <source file="workers/worker_voice_op.ps1">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_voice_op.ps1</source>
+        <source file="workers/worker_voice_op.sh">https://raw.githubusercontent.com/b451c/Reasonate/v1.0.0/scaffold/workers/worker_voice_op.sh</source>
+      </version>
+    </reapack>
+  </category>
+</index>
