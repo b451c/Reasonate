@@ -1,6 +1,6 @@
 # Reasonate
 
-![Reasonate - five AI voice tools, one REAPER window](docs/guide/img/reasonate-banner-1280.png)
+![Reasonate - the full ElevenLabs toolkit, wired into REAPER](docs/guide/img/reasonate-banner.png)
 
 AI audio production toolkit for [REAPER](https://www.reaper.fm), built on the
 [ElevenLabs](https://elevenlabs.io) API. Replace voices in recorded dialogue,
