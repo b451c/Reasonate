@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reasonate User Guide - AI voice toolkit for REAPER</title>
+<meta name="description" content="How to install and use Reasonate: text to speech, voice replacement, dubbing, word-level repair and sound effects, all inside REAPER.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">v1.0 - User Guide</div>
+  <h1>AI voices, dubbing and sound design.<br>Inside REAPER.</h1>
+  <p class="lede">Reasonate brings ElevenLabs AI audio into your REAPER timeline: generate speech from text, swap voices in recordings, dub into other languages, fix single words in a take, and create sound effects and music beds. Everything lands as regular items on regular tracks, and your source audio is never touched.</p>
+  <div class="badges">
+    <span class="badge">REAPER 7.0+</span>
+    <span class="badge">macOS / Windows / Linux</span>
+    <span class="badge">ReaImGui 0.10+</span>
+    <span class="badge">SWS</span>
+    <span class="badge">ElevenLabs API</span>
+  </div>
+</header>
+
+<main class="page">
+
+<section id="quick-start">
+  <h2><span class="kicker">Getting started</span>Quick start</h2>
+  <p>Reasonate is a ReaScript. It runs inside REAPER, uses your own ElevenLabs account, and stores everything locally. Setup takes about five minutes.</p>
+
+  <ol class="steps">
+    <li>
+      <strong>Install the requirements</strong>
+      <p>You need <strong>REAPER 7.0 or newer</strong>, <strong>ReaImGui 0.10 or newer</strong> and the <strong>SWS extension</strong>. Install ReaImGui through ReaPack: <span class="ui">Extensions</span> &rarr; <span class="ui">ReaPack</span> &rarr; <span class="ui">Browse packages</span>, search for "ReaImGui", install. Get SWS from <a href="https://www.sws-extension.org" target="_blank" rel="noopener">sws-extension.org</a>, then restart REAPER.</p>
+      <p class="dim">SWS powers in-app audio previews - without it every play button falls back to your system media player.</p>
+    </li>
+    <li>
+      <strong>Get an ElevenLabs API key</strong>
+      <p>Create an account at <a href="https://elevenlabs.io" target="_blank" rel="noopener">elevenlabs.io</a>, then copy an API key from your profile (<span class="ui">API Keys</span> section). The free tier works for trying things out; a paid tier gives you more credits and voice slots. Reasonate always shows you an estimated cost before it spends anything.</p>
+    </li>
+    <li>
+      <strong>Install Reasonate via ReaPack</strong>
+      <p><span class="ui">Extensions</span> &rarr; <span class="ui">ReaPack</span> &rarr; <span class="ui">Import repositories...</span> and paste:</p>
+      <p><code>https://raw.githubusercontent.com/b451c/Reasonate/main/index.xml</code></p>
+      <p>Then <span class="ui">Browse packages</span>, search for "Reasonate", install, and run <code>Script: reasonate.lua</code> from the Action List (assign a keyboard shortcut or toolbar button if you like).</p>
+      <p class="dim">Manual alternative: download the <a href="https://github.com/b451c/Reasonate" target="_blank" rel="noopener">repository</a>, copy the contents of <code>scaffold/</code> into <code>REAPER resource path/Scripts/Reasonate/</code> and load <code>reasonate.lua</code> via <span class="ui">Action List</span> &rarr; <span class="ui">New action</span> &rarr; <span class="ui">Load ReaScript</span>.</p>
+    </li>
+    <li>
+      <strong>Enter your API key</strong>
+      <p>On first launch Reasonate opens <span class="ui">Settings</span> automatically. Paste your key, press <span class="ui">Test</span> to verify it, then <span class="ui">Save &amp; fetch voices</span>. Your voice library loads and the header shows your subscription usage.</p>
+      <p class="dim">The key is stored in REAPER's local settings, never in your project files, and it is never passed on a command line where other apps could see it.</p>
+    </li>
+    <li>
+      <strong>Pick a mode and go</strong>
+      <p>A fresh project greets you with the mode picker. Each project remembers its mode; you can switch anytime with the tabs at the top of the window.</p>
+    </li>
+  </ol>
+
+  <figure class="shot">
+    <img src="img/concepts-mode-selector.png" alt="Reasonate mode selector showing five cards: TTS, Voice Replacement, Dubbing, Repair, SFX and Music" loading="lazy">
+    <figcaption>First launch in a project: choose one of the five modes.</figcaption>
+  </figure>
+</section>
+
+<section id="concepts">
+  <h2><span class="kicker">How it thinks</span>Five concepts worth 60 seconds</h2>
+
+  <h3>1. Modes</h3>
+  <p>Reasonate is five tools sharing one window. Each mode has its own workflow and its own chapter in this guide:</p>
+  <div class="cards">
+    <a class="card" href="tts.html">
+      <div class="accent-bar" style="background: var(--teal)"></div>
+      <h3>TTS</h3>
+      <p>Write text, get speech on a track. Single voice or a multi-speaker dialogue with up to 10 voices.</p>
+      <span class="go">Read the chapter -&gt;</span>
+    </a>
+    <a class="card" href="voice-replacement.html">
+      <div class="accent-bar" style="background: var(--amber)"></div>
+      <h3>Voice Replacement</h3>
+      <p>Swap the voice in an existing recording while keeping the performance. Whole takes, batch friendly.</p>
+      <span class="go">Read the chapter -&gt;</span>
+    </a>
+    <a class="card" href="dubbing.html">
+      <div class="accent-bar" style="background: var(--indigo)"></div>
+      <h3>Dubbing</h3>
+      <p>Transcribe, translate and re-voice your material in another language, timed to the original.</p>
+      <span class="go">Read the chapter -&gt;</span>
+    </a>
+    <a class="card" href="repair.html">
+      <div class="accent-bar" style="background: var(--violet)"></div>
+      <h3>Repair</h3>
+      <p>Fix a word or two in a finished take. Click words in a transcript, type the correction, splice.</p>
+      <span class="go">Read the chapter -&gt;</span>
+    </a>
+    <a class="card" href="sfx-music.html">
+      <div class="accent-bar" style="background: var(--red)"></div>
+      <h3>SFX &amp; Music</h3>
+      <p>Generate sound effects and music beds from a text prompt, or let AI propose sounds for a scene.</p>
+      <span class="go">Read the chapter -&gt;</span>
+    </a>
+  </div>
+
+  <h3>2. Non-destructive, always</h3>
+  <p>Reasonate never modifies your source audio. Generated audio lands on separate tracks (like <code>Track [AI]</code> or <code>[Dub ES: name]</code>) or as new takes, linked to the original. Every operation is wrapped in an undo block, so <kbd>Cmd+Z</kbd> / <kbd>Ctrl+Z</kbd> behaves exactly as you expect.</p>
+
+  <h3>3. The cache saves you money</h3>
+  <p>Every render is cached on disk, keyed by the exact input (audio, text, voice, settings). Repeat the same operation and Reasonate reuses the file instantly, at zero API cost. Change anything meaningful and it renders fresh. Cache files live next to your project in <code>reasonate_cache/</code>, so they travel with it.</p>
+
+  <h3>4. Costs are visible before you commit</h3>
+  <p>Anything that costs credits shows an estimate first: the batch dialog in Voice Replacement, the character counter in TTS, the live cost ticker in Dubbing, per-edit pricing in Repair. The header always shows your subscription usage. Details in <a href="tips-costs.html">Tips &amp; Costs</a>.</p>
+
+  <h3>5. One cast across all modes</h3>
+  <p>Name a speaker once, assign a voice once, and every mode can reuse it. The project's <a href="cast-registry.html">Cast Registry</a> remembers your characters, their descriptions and their voices per language - cloned voices included.</p>
+</section>
+
+<section id="interface">
+  <h2><span class="kicker">Orientation</span>The window at a glance</h2>
+  <ul>
+    <li><strong>Header</strong> - voice count, cache size, subscription usage bar, the <span class="heart">&hearts;</span> support button, and quick access to <span class="ui">Voice Manager</span>, <span class="ui">Library</span> and <span class="ui">Settings</span>.</li>
+    <li><strong>Mode tabs</strong> - switch tools without losing state; each mode keeps its panel exactly as you left it during the session.</li>
+    <li><strong>Footer</strong> - live activity chips for anything running in the background (renders, translations, recordings) with a retry button when something fails, plus the keyboard shortcuts for the current mode.</li>
+  </ul>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Cmd+Enter</kbd></td><td>Primary action of the current mode (Convert / Generate). Ctrl on Windows and Linux.</td></tr>
+        <tr><td><kbd>Cmd+,</kbd></td><td>Open Settings.</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close the current dialog, or cancel a running batch.</td></tr>
+        <tr><td><kbd>Tab</kbd></td><td>In REAPER: cycle takes on a selected item (native REAPER behavior, handy for variants).</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="next">
+  <h2><span class="kicker">Where next</span>Suggested reading order</h2>
+  <p>If you are new, skim <a href="voice-replacement.html">Voice Replacement</a> first - it introduces voices, converting and auditioning, which every other chapter builds on. Then jump to whichever mode matches your work. <a href="tips-costs.html">Tips &amp; Costs</a> is worth reading once before your first bigger batch.</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

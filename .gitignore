@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# REAPER project files (user-side, not part of source)
+*.rpp
+*.rpp-bak
+*.rpp-undo
+
+# Reasonate runtime artifacts (regenerable, user-specific)
+# (cache files live w REAPER resource path, NIE w repo, ale na wszelki wypadek
+#  jeśli ktoś trzymał tu test fixtures)
+reasonate_tmp/
+reasonate_cache/
+reasonate_output/
+# Legacy ReaCast paths (pre-rename 2026-05-10) — keep ignored for backward safety
+reacast_tmp/
+reacast_cache/
+reacast_output/
+
+# Per-project secrets (API key trzymany w ExtState, ale jako safety)
+.reasonate_key
+.reacast_key
+
+# Pre-refactor tarball checkpoints (per CLAUDE.md user feedback memory)
+.checkpoints/
+

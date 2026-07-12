@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dubbing - Reasonate User Guide</title>
+<meta name="description" content="Dub your material into other languages inside REAPER: transcription, AI translation with your own LLM key, voice casting per speaker and time-fitted speech generation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body data-accent="dubbing">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a class="active" href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Mode 03 - Dubbing</div>
+  <h1>Your material,<br>in any language.</h1>
+  <p class="lede">Dubbing transcribes your audio, translates it with an LLM you control, and re-voices it segment by segment - timed to the original, speaker by speaker, in as many target languages as the project needs. Every step is inspectable and editable; nothing is a black box.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<div class="facts">
+  <div><span class="k">Source</span><span class="v">Mixed file or multi-track</span></div>
+  <div><span class="k">Languages</span><span class="v">Any, several per project</span></div>
+  <div><span class="k">Translation</span><span class="v">Your own LLM key</span></div>
+  <div><span class="k">Output</span><span class="v">[Dub LANG: speaker] tracks</span></div>
+  <div><span class="k">Timing</span><span class="v">Fitted to the original</span></div>
+</div>
+
+<section id="pipeline">
+  <h2><span class="kicker">Overview</span>How a dub comes together</h2>
+  <p>A dubbing project moves through clear phases. You are in control at each gate:</p>
+  <ol>
+    <li><strong>Transcribe</strong> - speech-to-text with word timing and speaker detection (files over 8 minutes are split at silences automatically).</li>
+    <li><strong>Identify speakers</strong> - you confirm who is who; detected voices become named characters.</li>
+    <li><strong>Cast voices</strong> - assign a target-language voice to each character (library pick, clone, similar-search or design-from-prompt).</li>
+    <li><strong>Translate</strong> - segments go through your LLM with your context, style and glossary.</li>
+    <li><strong>Generate dub</strong> - each segment is rendered and spliced onto its speaker's dub track, stretched intelligently to fit the original timing.</li>
+  </ol>
+  <p class="dim">The status line at the bottom of the panel always shows the current phase, per-language progress counters and a live cost ticker.</p>
+</section>
+
+<section id="start">
+  <h2><span class="kicker">Step 1</span>Start the project</h2>
+  <figure class="shot narrow">
+    <img src="img/dubbing-start-project.png" alt="Start Dubbing Project modal: source selection, target language chips, TTS model, style preset and Voice Isolator option" loading="lazy">
+    <figcaption>One modal defines the project: source, languages, model, style.</figcaption>
+  </figure>
+  <ul>
+    <li><strong>Source</strong> - either a <em>single mixed file</em> (the item selected in REAPER; speakers are detected automatically) or a <em>multi-track session</em> (each selected track is one speaker; no length limit and no detection needed).</li>
+    <li><strong>Target languages</strong> - toggle any number of language chips, or add a custom ISO 639-1 code. More languages can be added later with <span class="ui">+ Add</span>.</li>
+    <li><strong>Style preset</strong> - tells the translator what kind of material this is. Thirteen presets ship with Reasonate (drama, documentary, podcast, comedy, kids, corporate...), and you can save your own; the preset prefills the translation context, which you can edit at any time.</li>
+    <li><strong>Voice Isolator</strong> - optional pre-clean of the source before transcription.</li>
+  </ul>
+  <figure class="shot narrow">
+    <img src="img/dubbing-style-presets.png" alt="Style preset dropdown listing options like Drama, Period drama, Comedy, Thriller, Kids, Documentary, Podcast, News" loading="lazy">
+    <figcaption>Style presets seed the translation brief.</figcaption>
+  </figure>
+</section>
+
+<section id="speakers">
+  <h2><span class="kicker">Step 2</span>Identify speakers</h2>
+  <p>After transcription, Reasonate shows every voice it detected, with a play button and a text sample per chunk. Your job: map each detected voice to a character. For a single-chunk file this is mostly pre-filled; for long, chunked material you make sure that "speaker_0 in chunk 1" and "speaker_2 in chunk 3" both point to the same person.</p>
+  <figure class="shot narrow">
+    <img src="img/dubbing-identify-speakers.png" alt="Identify speakers modal mapping detected voices to characters, with play buttons and word counts" loading="lazy">
+    <figcaption>Confirm who is who before any credits are spent on translation.</figcaption>
+  </figure>
+</section>
+
+<section id="cast">
+  <h2><span class="kicker">Step 3</span>Cast the voices</h2>
+  <p>The <strong>CAST</strong> sidebar lists your characters. Each needs a voice for each target language. Four ways to get one:</p>
+  <ul>
+    <li><span class="ui">Pick voice...</span> - choose from your ElevenLabs library.</li>
+    <li><span class="ui">Clone from item</span> - train an instant voice clone from the speaker's own audio (select their clean section in REAPER first). The dub then keeps the original person's timbre.</li>
+    <li><span class="ui">Find similar from item</span> - let ElevenLabs suggest library voices that sound like the original speaker.</li>
+    <li><span class="ui">Design voice from prompt</span> - describe a voice ("warm female narrator, 40s, slight rasp") and pick from generated previews.</li>
+  </ul>
+  <div class="callout">
+    <span class="label">Cast Registry</span>
+    <p>Characters and their voices sync automatically to the project's <a href="cast-registry.html">Cast Registry</a>. If the registry already knows a character (say, from Repair), a <span class="ui">Match cast (N)</span> button appears with suggestions - you review them in a modal and apply only what you check. And when you add another target language, the new language quietly inherits the cast you already built.</p>
+  </div>
+</section>
+
+<section id="context">
+  <h2><span class="kicker">Step 4</span>Context, style and glossary</h2>
+  <p>The collapsible <span class="ui">Translation context</span> section above the table is your director's brief to the translator: tone, era, audience, medium and formality dropdowns, plus a free-text field for anything else ("keep the jokes; audience is teenagers; brand names stay English").</p>
+  <p><span class="ui">Glossary...</span> holds three lists that keep long projects consistent: <strong>characters</strong> (names and descriptions), <strong>terms</strong> (translate X as Y), and <strong>do-not-translate</strong> (product names, catchphrases).</p>
+  <p class="dim">Editing context or glossary marks affected translations as stale - you will see exactly what needs a re-run, and nothing re-translates behind your back.</p>
+  <div class="callout cost">
+    <span class="label">Bring your own LLM</span>
+    <p>Translation runs on your own key: Anthropic, OpenAI, Gemini, DeepSeek, Grok or Mistral (configure in <a href="settings.html#ai">Settings &rarr; AI</a>). Costs are token-based and shown live in the ticker. Anthropic users can enable prompt caching for large projects - repeat context comes at a fraction of the price.</p>
+  </div>
+</section>
+
+<section id="translate-generate">
+  <h2><span class="kicker">Step 5</span>Translate, review, generate</h2>
+  <figure class="shot">
+    <img src="img/dubbing-translating.png" alt="Dubbing panel with CAST sidebar showing voice options for a speaker, the segments table with a pending segment, and the translation pump running" loading="lazy">
+    <figcaption>Translation running: segments fill in as the pump works, with live counters below.</figcaption>
+  </figure>
+  <p><span class="ui">Translate all</span> processes every pending segment (three at a time, with automatic retry on rate limits). Then read - the table shows source and translation side by side. Edit anything: double-click a cell to edit text in place, or open the full <strong>Inspector</strong> for a segment (double-click the row) to edit source, translation and a per-segment director's note.</p>
+  <figure class="shot">
+    <img src="img/dubbing-segment-menu.png" alt="Right-click menu on a segment: open inspector, reveal in REAPER, edit source or translation, preview translation, re-translate, re-generate, alternatives, reassign speaker, merge segments" loading="lazy">
+    <figcaption>Everything per segment is one right-click away - including a free preview of the translated read.</figcaption>
+  </figure>
+  <p>Before committing to a full dub you can <span class="ui">&#9654; Preview translation</span> on any segment - it renders that segment's read so you can hear the voice speak the translation. The render is cached, so if you like it, generating the dub reuses it at no extra cost.</p>
+  <p><span class="ui">Generate dub</span> renders all translated segments and splices them onto <code>[Dub LANG: speaker]</code> tracks under your source. Segment status pills flip to <span class="ui">DUBBED</span> as they land.</p>
+  <figure class="shot">
+    <img src="img/dubbing-dubbed.png" alt="Completed dub: the Spanish dub item on its own track in REAPER, segment marked DUBBED 0.91x, cost summary and cache statistics at the bottom" loading="lazy">
+    <figcaption>Done: the dub sits on its own track, timed to the original. The pill shows the applied tempo ratio.</figcaption>
+  </figure>
+</section>
+
+<section id="timing">
+  <h2><span class="kicker">The hard part, solved</span>Timing and tempo</h2>
+  <p>Translations rarely have the same length as the original. Reasonate handles this on two levels:</p>
+  <ul>
+    <li><strong>While translating</strong> - the LLM gets a timing budget per segment and is asked to write translations that fit, using natural pause marks where the original breathes.</li>
+    <li><strong>While splicing</strong> - each rendered segment is fitted to the original slot with a smart ladder: use the natural pace when it fits, borrow silence after the segment when available, and only then time-stretch, gently and within limits. Speech stretching uses REAPER's elastique "Soloist: Speech" mode automatically.</li>
+  </ul>
+  <p>The result is shown honestly: the <span class="ui">DUBBED - 1.08x</span> pill tells you the applied ratio, and warnings appear if a segment had to overrun or leave a gap. Click the pill for a <strong>tempo slider</strong> (0.74x to 1.35x) and adjust a segment by ear; the item refits in place, undoable as a single action. Too tight to fix with tempo? Use <span class="ui">Expand/Shorten translation</span> and re-render that one segment.</p>
+</section>
+
+<section id="iterating">
+  <h2><span class="kicker">Iterating</span>Staying in control on long projects</h2>
+  <ul>
+    <li><strong>Stale tracking</strong> - change a source text, a translation, a voice or the context, and everything affected downstream is marked stale (with a distinct color on the timeline items too). Re-run just the stale parts.</li>
+    <li><strong>Per-segment tools</strong> - re-translate, re-generate one take, or <span class="ui">Generate alternatives x3</span> and pick the best take in REAPER (<kbd>Tab</kbd> cycles).</li>
+    <li><strong>Filters</strong> - status chips above the table (pending / translated / stale / DUBBED / failed) plus one-click selection of everything that needs attention.</li>
+    <li><strong>Reveal in REAPER</strong> - the table and the timeline stay in sync: click a segment to select its item, click an item to highlight its row; the playhead highlights the segment it is passing through.</li>
+    <li><strong>Failures are terminal, not silent</strong> - a failed segment shows a red chip with the reason and a <span class="ui">Retry</span> button. No payment loops.</li>
+  </ul>
+</section>
+
+<div class="pager">
+  <a class="prev" href="tts.html"><span>Previous</span>TTS</a>
+  <a class="next" href="repair.html"><span>Next</span>Repair</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#pipeline">Overview</a>
+  <a href="#start">1. Start the project</a>
+  <a href="#speakers">2. Identify speakers</a>
+  <a href="#cast">3. Cast the voices</a>
+  <a href="#context">4. Context &amp; glossary</a>
+  <a href="#translate-generate">5. Translate &amp; generate</a>
+  <a href="#timing">Timing &amp; tempo</a>
+  <a href="#iterating">Iterating</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

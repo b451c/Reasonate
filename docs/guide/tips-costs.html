@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tips &amp; Costs - Reasonate User Guide</title>
+<meta name="description" content="What each Reasonate feature costs, how the cache keeps repeats free, and practical habits that keep your ElevenLabs bill small.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a class="active" href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Reference - Tips &amp; Costs</div>
+  <h1>Know what you spend.<br>Spend it once.</h1>
+  <p class="lede">Reasonate's rule is simple: costs are shown before you commit, and identical work is never paid twice. Here is what each feature draws from your ElevenLabs plan, and the habits that keep bills small.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<section id="what-costs">
+  <h2><span class="kicker">The bill</span>What costs what</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Feature</th><th>Cost basis</th><th>Where you see it</th></tr></thead>
+    <tbody>
+      <tr><td>Voice Replacement</td><td>ElevenLabs credits, proportional to audio length (the dialog estimates it in characters)</td><td>Batch confirmation dialog, before converting</td></tr>
+      <tr><td>TTS (single &amp; dialogue)</td><td>Characters of text</td><td>Live counter next to Generate; all-time counter in Settings</td></tr>
+      <tr><td>Repair</td><td>Characters of the regenerated phrase (your fix plus a few context words) + speech-to-text per new item</td><td>Estimated per edit, in the panel</td></tr>
+      <tr><td>Dubbing</td><td>Speech-to-text minutes + LLM tokens (your key) + TTS characters</td><td>Live cost ticker in the status line; alert threshold before big spends</td></tr>
+      <tr><td>Sound effects</td><td>~40 credits per second of result, per take</td><td>Cost line under the Generate button</td></tr>
+      <tr><td>Music</td><td>Music allowance of your plan (minutes based)</td><td>Estimate in the panel; exact usage on the ElevenLabs dashboard</td></tr>
+      <tr><td>Voice Isolator</td><td>1000 credits per minute of audio</td><td>Opt-in toggles; results cached</td></tr>
+      <tr><td>Voice cloning (IVC)</td><td>Included with paid ElevenLabs tiers; each clone occupies a voice slot</td><td>Voice Manager shows your voices; delete unused clones to free slots</td></tr>
+    </tbody>
+  </table></div>
+  <p class="dim">The header bar always shows your subscription usage. The exact ledger lives on your ElevenLabs dashboard.</p>
+</section>
+
+<section id="cache">
+  <h2><span class="kicker">The discount</span>How the cache works</h2>
+  <p>Every render is stored on disk under a fingerprint of its exact inputs: source audio, text, voice, model, settings, seed. Ask for the same thing again and you get the file instantly, free. Change anything that would change the sound, and it renders fresh.</p>
+  <ul>
+    <li><strong>Free repeats</strong> - re-converting an unchanged item, re-selecting a transcribed item in Repair, re-generating a dub segment you already previewed, re-inserting an SFX take.</li>
+    <li><strong>Paid re-renders</strong> - a different voice, edited text, changed voice settings, modified source audio, or a new seed (that is what Regen and Variants do on purpose - a new seed is a new read).</li>
+    <li><strong>Where it lives</strong> - conversion cache sits in <code>reasonate_cache/</code> next to your project (it travels with the project folder); transcripts and TTS phrases cache in REAPER's resource path. A size cap with oldest-first eviction is in <a href="settings.html#general">Settings &rarr; General</a>.</li>
+  </ul>
+</section>
+
+<section id="habits">
+  <h2><span class="kicker">Practice</span>Habits that save money</h2>
+  <ul>
+    <li><strong>Read the confirmation dialogs.</strong> They exist so the price is a decision, not a surprise.</li>
+    <li><strong>Preview before you commit.</strong> In Dubbing, <span class="ui">&#9654; Preview translation</span> renders a segment you were going to render anyway - liking it makes the dub generation a cache hit.</li>
+    <li><strong>Let the transcript cache work for you.</strong> Repair and SFX From scene share transcription. Analyzing a scene on material you already repaired transcribes nothing new.</li>
+    <li><strong>Use Variants deliberately.</strong> Three takes cost three renders. Generate one, and reach for Variants when the read genuinely needs options.</li>
+    <li><strong>Point cheap models at cheap jobs.</strong> In <a href="settings.html#ai">Settings &rarr; AI</a>, give SFX idea generation a budget model and keep the strong one for dubbing translation. Anthropic users: keep prompt caching on.</li>
+    <li><strong>Set the cost alert threshold</strong> on dubbing projects - a typo in scope should trigger a dialog, not a bill.</li>
+    <li><strong>Clean up voice slots.</strong> Dubbing and Repair can create clones per speaker; the Voice Manager lists them all with rename and delete (batch delete included).</li>
+  </ul>
+</section>
+
+<section id="quota">
+  <h2><span class="kicker">Plans</span>A note on ElevenLabs tiers</h2>
+  <p>Reasonate works with any plan that has API access. Voice cloning, higher output formats (192 kbps and PCM) and larger credit pools come with the paid tiers; the free tier is enough to evaluate the workflow. Reasonate itself adds no fees on top - your ElevenLabs subscription and your optional LLM keys are the whole bill.</p>
+</section>
+
+<div class="pager">
+  <a class="prev" href="settings.html"><span>Previous</span>Settings</a>
+  <a class="next" href="troubleshooting.html"><span>Next</span>Help</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#what-costs">What costs what</a>
+  <a href="#cache">How the cache works</a>
+  <a href="#habits">Money-saving habits</a>
+  <a href="#quota">ElevenLabs tiers</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

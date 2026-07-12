@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repair - Reasonate User Guide</title>
+<meta name="description" content="Fix single words in a finished take: click words in a transcript, type the correction, and Reasonate splices a regenerated phrase seamlessly into the recording.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body data-accent="repair">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a class="active" href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Mode 04 - Repair</div>
+  <h1>Edit the recording<br>like it was text.</h1>
+  <p class="lede">One wrong word in an otherwise perfect take? Repair transcribes the item, lets you click the word, type the fix, and splices a regenerated phrase into place - matched to the speaker's voice, timing and room. No re-recording, no razor editing.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<div class="facts">
+  <div><span class="k">Input</span><span class="v">Selected audio item</span></div>
+  <div><span class="k">Operations</span><span class="v">Replace / Insert / Delete</span></div>
+  <div><span class="k">Voice</span><span class="v">Clone of the speaker</span></div>
+  <div><span class="k">Typical cost</span><span class="v">Fractions of a cent per edit</span></div>
+  <div><span class="k">Splice</span><span class="v">Non-destructive, undoable</span></div>
+</div>
+
+<section id="workflow">
+  <h2><span class="kicker">Core workflow</span>Fix a word in four clicks</h2>
+
+  <figure class="shot">
+    <img src="img/repair-replace.png" alt="Repair mode: the transcript as clickable word chips, a selected word, the Replace panel with replacement text and the context that will be regenerated" loading="lazy">
+    <figcaption>The take as text: select a word, type the correction, apply.</figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li>
+      <strong>Select the item in REAPER</strong>
+      <p>Repair transcribes it automatically (or reuses the cached transcript - selecting the same item later costs nothing). The transcript appears as clickable word chips with a search box for long material.</p>
+    </li>
+    <li>
+      <strong>Select the words</strong>
+      <p>Left-click selects a word, <kbd>Shift</kbd>+click extends the range, right-click plays the word so you can confirm you have the right spot. The REAPER playhead also underlines the word it is passing through.</p>
+    </li>
+    <li>
+      <strong>Choose the operation</strong>
+      <p><span class="ui">Replace</span> swaps the selection for new text. <span class="ui">Insert</span> adds words at the cursor between chips. <span class="ui">Delete</span> removes the selection and closes the gap cleanly. <kbd>Tab</kbd> cycles the three modes.</p>
+      <p class="dim">For Replace and Insert, Reasonate regenerates a few words on each side of the edit along with your new text, so the prosody flows through the splice instead of jumping. The panel shows exactly which words will be regenerated, and the estimated cost.</p>
+    </li>
+    <li>
+      <strong>Apply and listen</strong>
+      <p>The regenerated phrase is spliced into the take at millisecond precision (text-to-audio alignment plus acoustic analysis pick the cleanest cut points, with crossfades in silences). The item is split around the edit; the new middle part carries the fix.</p>
+    </li>
+  </ol>
+
+  <div class="callout">
+    <span class="label">Non-destructive</span>
+    <p>The original audio stays complete inside the new item - you can drag its edges in REAPER to reveal more or less, and <kbd>Cmd+Z</kbd> undoes the whole edit. The panel even notices external undos and resyncs itself; there is also an explicit <span class="ui">Undo last edit</span> button.</p>
+  </div>
+</section>
+
+<section id="voice">
+  <h2><span class="kicker">Whose voice?</span>Voices and clones</h2>
+  <p>The fix has to sound like the speaker. The header shows which voice will be used and where it comes from - for example <span class="ui">Voice: Piotr Pro - from track casting</span>. Reasonate resolves the voice in this order:</p>
+  <ol>
+    <li>A voice you assigned to this speaker (see <a href="#speakers">casting</a> below),</li>
+    <li>a voice linked to this character in the project's <a href="cast-registry.html">Cast Registry</a>,</li>
+    <li>the track's voice (as in Voice Replacement),</li>
+    <li>or, when there is nothing yet: Reasonate offers to <strong>train an instant clone</strong> from the item itself.</li>
+  </ol>
+  <p>Training a clone takes seconds. For multi-speaker material a picker opens first: choose the speaker, and Reasonate pre-selects their cleanest regions (you can adjust and preview the training audio before spending anything). <span class="ui">Re-clone</span> retrains after you improve the source; <span class="ui">Voice Isolator</span> pre-cleans noisy material for both transcription and cloning.</p>
+</section>
+
+<section id="speakers">
+  <h2><span class="kicker">Multiple voices in one file</span>Speaker casting</h2>
+  <p>When transcription detects several speakers, a banner offers <span class="ui">Cast voices</span>: a small table with each speaker, a 5-second sample button, a voice picker and a <span class="ui">Train clone</span> shortcut. Name the speakers - named characters go to the Cast Registry and follow you into Dubbing and TTS.</p>
+  <figure class="shot narrow">
+    <img src="img/repair-cast-voices.png" alt="Cast voices modal in Repair: two named speakers with a sample play button, an assigned voice and a Train clone button each" loading="lazy">
+    <figcaption>One voice per detected speaker; naming a speaker saves the pairing to the project cast.</figcaption>
+  </figure>
+  <ul>
+    <li>Every edit automatically uses the voice cast for the speaker of the selected words.</li>
+    <li>If the registry knows a better fit, a hint appears: "Selected words are spoken by X" with a one-click <span class="ui">Use X's voice</span>.</li>
+    <li>Selected a range that spans two speakers? Repair refuses to guess: use <span class="ui">Split at speaker boundary</span> and fix one speaker at a time.</li>
+  </ul>
+</section>
+
+<section id="tempo">
+  <h2><span class="kicker">Fine control</span>Pace and delivery</h2>
+  <ul>
+    <li><strong>Speed slider</strong> - nudge the generated phrase faster or slower before applying.</li>
+    <li><strong>Match pace</strong> (optional, off by default; Settings &rarr; Repair) - Reasonate measures the take's syllable rate, generates at a matching pace, and picks the better of two renders when the first misses. Natural pacing without the toggle is often already right; try the toggle on fast, dense reads.</li>
+    <li><strong>Voice settings</strong> - a collapsible section overrides stability and similarity for this one edit.</li>
+  </ul>
+  <div class="callout warn">
+    <span class="label">Long material</span>
+    <p>Repair happily handles long items (a warning appears above 25 minutes - transcription cost and panel size grow with length). For very long sessions, split the item first and repair the part that needs it.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="prev" href="dubbing.html"><span>Previous</span>Dubbing</a>
+  <a class="next" href="sfx-music.html"><span>Next</span>SFX &amp; Music</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#workflow">Core workflow</a>
+  <a href="#voice">Voices &amp; clones</a>
+  <a href="#speakers">Speaker casting</a>
+  <a href="#tempo">Pace &amp; delivery</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

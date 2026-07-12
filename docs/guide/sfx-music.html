@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SFX &amp; Music - Reasonate User Guide</title>
+<meta name="description" content="Generate sound effects and music beds from text, or let AI analyze a scene in your audio and propose the whole sound package - inside REAPER.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body data-accent="sfx">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a class="active" href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Mode 05 - SFX &amp; Music</div>
+  <h1>Describe a sound.<br>Or let the scene ask for it.</h1>
+  <p class="lede">SFX &amp; Music generates sound effects and music beds from plain text descriptions - and its From scene view goes further: it listens to your material, understands what happens in it, and proposes a complete sound package placed exactly where each event occurs.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<div class="facts">
+  <div><span class="k">Sub-modes</span><span class="v">Describe / From scene</span></div>
+  <div><span class="k">Sound effects</span><span class="v">0.5 - 30 s, loopable</span></div>
+  <div><span class="k">Music</span><span class="v">3 s - 10 min beds</span></div>
+  <div><span class="k">Output tracks</span><span class="v">"SFX" and "Music"</span></div>
+  <div><span class="k">SFX cost</span><span class="v">~40 credits / second</span></div>
+</div>
+
+<section id="describe">
+  <h2><span class="kicker">Sub-mode 1</span>Describe</h2>
+
+  <figure class="shot">
+    <img src="img/sfx-describe.png" alt="Describe view: sound effect prompt field, auto length, loop toggle, stick-to-description slider, takes stepper and the Generate button" loading="lazy">
+    <figcaption>Type what you hear in your head; Reasonate renders it.</figcaption>
+  </figure>
+
+  <h3>Sound effects</h3>
+  <ul>
+    <li><strong>Prompt</strong> - plain language: "Glass shattering on concrete", "Footsteps on gravel, then a metallic door opens".</li>
+    <li><strong>Length</strong> - Auto lets the model decide; or set 0.5 to 30 seconds.</li>
+    <li><strong>Loop</strong> - renders a seamless loop (great for room tone and ambience beds; loopable musical material like drum loops works here too).</li>
+    <li><strong>Stick to description</strong> - how literally the model should follow your prompt versus improvise.</li>
+    <li><strong>Takes per Generate</strong> - render several proposals per click and keep the best.</li>
+  </ul>
+
+  <h3>Music</h3>
+  <p>Switch <span class="ui">Generate:</span> to <span class="ui">Music</span> for full music beds: describe the style and mood, set the length (quick chips from 10 seconds to 5 minutes), and choose <span class="ui">Instrumental only</span> if you do not want vocals. Two engines are available - <strong>Music v2</strong> (default, newest) and <strong>v1</strong>.</p>
+
+  <div class="callout cost">
+    <span class="label">Cost</span>
+    <p>Sound effects cost about 40 credits per second of result, per take. Music draws from your plan's music allowance (minutes based); the preview number in the panel is an estimate - check your ElevenLabs dashboard for exact usage.</p>
+    <p><strong>Generated music does not loop by itself</strong> - the music engine has no loop option. For short musical loops, use the sound-effects engine with Loop on.</p>
+  </div>
+
+  <p>Every result appears in the results list with <span class="ui">&#9654;</span> preview, <span class="ui">Insert</span> (placed at the playhead on an auto-created "SFX" or "Music" track) and <span class="ui">&#215;</span>. Results are grouped per Generate click, and the whole panel - including your generated takes - is saved with the project.</p>
+</section>
+
+<section id="from-scene">
+  <h2><span class="kicker">Sub-mode 2</span>From scene</h2>
+  <p>This is sound design in reverse: instead of you describing sounds, Reasonate reads the scene and proposes them.</p>
+
+  <ol class="steps">
+    <li>
+      <strong>Point it at audio</strong>
+      <p>Select a source item in REAPER (narrow it with a time selection if you only want a fragment). Pick a scene style - Film / drama, Podcast, Audio drama, or one of your own saved styles - and optionally refine ("only diegetic sounds, no music").</p>
+    </li>
+    <li>
+      <strong>Analyze scene</strong>
+      <p>Reasonate transcribes the fragment (shared cache with Repair - already-transcribed material is free), sends the scene to your LLM, and returns a list of <strong>sound ideas</strong>: openers, ambience beds, one-shot foley for specific events, outros. Each idea knows <em>when</em> it belongs: intro before the scene, anchored at the exact second of its event, or after the scene ends.</p>
+    </li>
+    <li>
+      <strong>Edit, generate, audition</strong>
+      <p>Every idea is fully editable: the prompt text, the kind (one-shot / ambience / music), length, placement, engine (sound effects vs music), instrumental toggle. <span class="ui">Generate</span> renders takes inline in the row; <span class="ui">&#9654;</span> auditions them. Not feeling an idea? <span class="ui">New idea</span> rephrases it into a different take on the same moment.</p>
+    </li>
+    <li>
+      <strong>Insert at scene</strong>
+      <p>One click places the take exactly where the idea points - openers end right where the scene starts, anchored effects hit their word, ambience beds can loop-fill the entire scene. Inserts respect whatever placement values the row currently shows, so you can retime before committing.</p>
+    </li>
+  </ol>
+
+  <figure class="shot">
+    <img src="img/sfx-from-scene.png" alt="From scene view with a production table of sound ideas for a podcast: music opener, room tone ambience, one-shot foley and outro jingle, each with editable prompt, engine, length, placement and generated takes" loading="lazy">
+    <figcaption>A proposed sound package for a podcast episode: opener, room tone, foley, outro - each editable and placed on the timeline for you.</figcaption>
+  </figure>
+
+  <figure class="shot">
+    <img src="img/sfx-from-scene-timeline.png" alt="From scene next to the REAPER timeline: the generated outro jingle inserted on the Music track after the end of the source item" loading="lazy">
+    <figcaption>Insert at scene in action: the outro jingle lands on the Music track, right where the episode ends.</figcaption>
+  </figure>
+
+  <div class="callout">
+    <span class="label">Tip</span>
+    <p>The number of proposals follows the scene and the style - an audio drama brief asks for foley on every action plus layered ambience, a podcast brief keeps it to an opener, a bed and an outro. Your saved styles can encode your own production recipe.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="prev" href="repair.html"><span>Previous</span>Repair</a>
+  <a class="next" href="cast-registry.html"><span>Next</span>Cast Registry</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#describe">Describe</a>
+  <a href="#from-scene">From scene</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

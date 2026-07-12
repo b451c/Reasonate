@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTS - Reasonate User Guide</title>
+<meta name="description" content="Generate speech from text inside REAPER: single voice or multi-speaker dialogue, v3 audio tags, AI-assisted delivery, script import and per-line regeneration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body data-accent="tts">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a class="active" href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Mode 01 - TTS</div>
+  <h1>A voice studio<br>where your cursor is.</h1>
+  <p class="lede">Write text, pick a voice, press Generate - the speech appears as an item at your edit cursor. TTS mode covers everything from a single pickup line to a full multi-speaker dialogue with expressive v3 audio tags.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<div class="facts">
+  <div><span class="k">Sub-modes</span><span class="v">Single voice / Dialogue</span></div>
+  <div><span class="k">Models</span><span class="v">v3, Multilingual v2, Flash, Turbo</span></div>
+  <div><span class="k">Dialogue</span><span class="v">Up to 10 speakers</span></div>
+  <div><span class="k">Output</span><span class="v">Item at edit cursor</span></div>
+  <div><span class="k">Cost basis</span><span class="v">Characters</span></div>
+</div>
+
+<section id="single">
+  <h2><span class="kicker">Sub-mode 1</span>Single voice</h2>
+
+  <figure class="shot">
+    <img src="img/tts-single.png" alt="TTS single voice panel: text editor with v3 audio tags hint, voice picker, model radio buttons, stability presets and sliders, target track selector and Generate button" loading="lazy">
+    <figcaption>Single voice: text, voice, model, delivery controls - then Generate.</figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li>
+      <strong>Write (up to 5000 characters)</strong>
+      <p>Type or paste into the editor. With the v3 model you can add <a href="#tags">audio tags</a> like <code>[whispers]</code> or <code>[laughs]</code> anywhere in the text for expressive delivery.</p>
+    </li>
+    <li>
+      <strong>Pick voice and model</strong>
+      <p><span class="ui">Pick voice...</span> opens the same picker used everywhere in Reasonate. Choose a model for the job: <strong>v3</strong> for expressiveness and audio tags, <strong>Multilingual v2</strong> for stable long-form narration, <strong>Flash v2.5</strong> when speed and price matter most.</p>
+    </li>
+    <li>
+      <strong>Shape the delivery</strong>
+      <p>Stability (v3 offers three presets: Creative / Natural / Robust), similarity, style and speed sliders, plus speaker boost. Save any combination as a named <strong>preset</strong> and recall it from the dropdown later.</p>
+    </li>
+    <li>
+      <strong>Generate</strong>
+      <p>Press <span class="ui">Generate</span> or <kbd>Cmd+Enter</kbd>. The item lands on the target track (or on a new track if none is picked) at the edit cursor, and the cursor jumps to its end so you can keep writing the next line. <span class="ui">Variants x3</span> renders three different reads as takes of one item.</p>
+    </li>
+  </ol>
+
+  <div class="callout">
+    <span class="label">Per-track memory</span>
+    <p>Each target track remembers the last voice, model and settings used on it. Come back a week later, select the track, and the panel is set up the way that voice-over track expects.</p>
+  </div>
+
+  <h3 id="history">History and takes</h3>
+  <p>Generated items on the current target track are listed under the editor. From there you can play any of them, cycle takes (<span class="ui">&#9664; 2/3 &#9654;</span>), lock an item against accidental changes, or <strong>Regen</strong> it - a fresh read with a new seed appended as another take. Right-click a row for extras: delete a take, delete the item, or reveal the audio file on disk.</p>
+</section>
+
+<section id="tags">
+  <h2><span class="kicker">Expressiveness</span>v3 audio tags</h2>
+  <p>The v3 model reads stage directions written in square brackets. Reasonate ships a curated palette of about 70 tags in seven groups (Emotions, Delivery, Non-verbal, SFX, Accent, Body state, Narrative), each with a tooltip explaining what it does. Click into the text where you want the tag, then click the tag - it is inserted at the cursor.</p>
+  <p class="dim">Example: <code>Well... [sighs] I suppose you are right. [whispers] But not a word to anyone.</code></p>
+  <p>The palette has a search box, and <span class="ui">Hide tags</span> collapses it when you need the full width for writing.</p>
+
+  <h3 id="enhance">Enhance: let AI place the tags</h3>
+  <p>Do not want to hand-place tags? Press <span class="ui">Enhance</span>. An LLM reads your text and inserts fitting v3 audio tags <strong>without changing a single word</strong> - Reasonate verifies the words afterwards and rejects any edit that is not purely tags. You choose the intensity (Subtle / Standard / Theatrical), can add a director's note ("tired, end-of-day radio host"), and optionally allow pause marks and emphasis capitalization. Review the result; revert restores your original text.</p>
+  <div class="callout cost">
+    <span class="label">Cost</span>
+    <p>Enhance uses your own LLM key (see <a href="settings.html#ai">Settings &rarr; AI</a>), not ElevenLabs credits. Typically a fraction of a cent per call.</p>
+  </div>
+</section>
+
+<section id="dialogue">
+  <h2><span class="kicker">Sub-mode 2</span>Multi-speaker dialogue</h2>
+  <p>Switch to <span class="ui">Multi-speaker dialogue</span> to write scenes: a cast of named speakers, lines in order, one Generate producing a single natural-sounding conversation (ElevenLabs text-to-dialogue, v3).</p>
+
+  <figure class="shot">
+    <img src="img/tts-dialogue.png" alt="TTS dialogue sub-mode with two speakers assigned to voices, two dialogue lines with speaker selectors, and the v3 tags palette" loading="lazy">
+    <figcaption>Dialogue: a cast at the top, lines below, tags palette on the right.</figcaption>
+  </figure>
+
+  <h3>Build the cast</h3>
+  <ul>
+    <li><span class="ui">+ Add speaker</span> creates a slot (A, B, C...); click the name to rename, pick a voice per speaker. Up to 10 voices per dialogue.</li>
+    <li>Right-click a speaker chip for <strong>per-speaker voice settings</strong> (stability, similarity, style, speed).</li>
+    <li><span class="ui">Save cast as...</span> stores the lineup for reuse across projects; <span class="ui">Cast from project</span> pulls characters and voices from this project's <a href="cast-registry.html">Cast Registry</a> - the cast you built in Dubbing or Repair is one click away.</li>
+  </ul>
+
+  <h3>Write the lines</h3>
+  <ul>
+    <li>Each line has a speaker selector and a text field; reorder with <span class="ui">&#8593;</span><span class="ui">&#8595;</span>, remove with <span class="ui">&#215;</span>. The whole dialogue can total 2000 characters (the counter keeps you honest).</li>
+    <li><span class="ui">&#9654;</span> on a line renders a quick solo preview of just that line in the speaker's voice - useful for checking a voice fit before generating the scene.</li>
+    <li><span class="ui">Import script...</span> reads a <code>.txt</code>/<code>.md</code> file in the common <code>Name: line</code> format and builds speakers and lines for you.</li>
+    <li>Audio tags work here too - click into a line, then tap a tag from the palette.</li>
+  </ul>
+
+  <h3>Generate and iterate</h3>
+  <p>One press renders the whole conversation as a single item. After generating:</p>
+  <ul>
+    <li><strong>Line playback</strong> - the <span class="ui">&#9654;</span> next to each line now plays that line inside the generated take (Reasonate aligns text to audio automatically). Move the REAPER playhead through the item and the matching line lights up.</li>
+    <li><strong>Line regeneration</strong> - edit one line and re-generate just that line. With <span class="ui">Cut into line items</span> the dialogue is split into per-line items and the new read replaces its block; otherwise patches land on a dedicated "TTS - line takes" track under the original.</li>
+    <li><strong>Enhance</strong> works on dialogue as well, per line, with the same words-preserved guarantee.</li>
+    <li><strong>Split per speaker</strong> - optional setting that splits a generated dialogue onto one track per speaker (via speech-to-text diarization) for individual mixing.</li>
+  </ul>
+
+  <div class="callout warn">
+    <span class="label">Good to know</span>
+    <p>Dialogue uses the v3 model exclusively, and line patching maps lines to the last generated take by order - if you add, remove or reorder lines after generating, re-generate the whole dialogue instead of patching.</p>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="prev" href="voice-replacement.html"><span>Previous</span>Voice Replacement</a>
+  <a class="next" href="dubbing.html"><span>Next</span>Dubbing</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#single">Single voice</a>
+  <a href="#history">History &amp; takes</a>
+  <a href="#tags">v3 audio tags</a>
+  <a href="#enhance">Enhance</a>
+  <a href="#dialogue">Multi-speaker dialogue</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

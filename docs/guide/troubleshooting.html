@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting - Reasonate User Guide</title>
+<meta name="description" content="Common Reasonate issues and their fixes: installation, API connection, playback, long items, cache behavior and where to get support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a class="active" href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Reference - Troubleshooting</div>
+  <h1>When something<br>does not sound right.</h1>
+  <p class="lede">Most problems fall into a handful of patterns. Find yours below; each entry is symptom, cause, fix. If nothing matches, the support section at the bottom tells you how to report it well.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<section id="install">
+  <h2><span class="kicker">Setup</span>Installation and startup</h2>
+
+  <h3>The window does not open / an error mentions ReaImGui</h3>
+  <p>Reasonate needs ReaImGui 0.10 or newer. Install or update it: <span class="ui">Extensions</span> &rarr; <span class="ui">ReaPack</span> &rarr; <span class="ui">Browse packages</span> &rarr; "ReaImGui", then restart REAPER.</p>
+
+  <h3>"curl not found" or network calls fail instantly (macOS)</h3>
+  <p>REAPER's GUI on macOS does not inherit your shell's PATH. Reasonate resolves the absolute curl path automatically on first run; if that failed, run <code>_phase0_check.lua</code> from the Action List once - it finds curl, validates the environment and stores the result.</p>
+
+  <h3>API key test fails</h3>
+  <p>Re-copy the key from the ElevenLabs profile page (no spaces), check that your network allows HTTPS to <code>api.elevenlabs.io</code>, and try <span class="ui">Test connection</span> again. Note: fetching a large voice library can take 10-15 seconds - that is normal.</p>
+</section>
+
+<section id="playback">
+  <h2><span class="kicker">Sound</span>Playback and previews</h2>
+
+  <h3>Previews open in an external player</h3>
+  <p>The SWS extension is missing. SWS is a requirement - in-app playback runs through it, and without it every preview falls back to your system audio player. Install SWS from <a href="https://www.sws-extension.org" target="_blank" rel="noopener">sws-extension.org</a>, restart REAPER, and previews play inside REAPER.</p>
+
+  <h3>Generated music does not loop</h3>
+  <p>By design - the music engine has no loop option, and asking for a "seamless loop" in the prompt does not work. For short musical loops (up to 30 s), use the sound-effects engine with <span class="ui">Loop</span> enabled; it handles musical material like drum loops well.</p>
+</section>
+
+<section id="conversions">
+  <h2><span class="kicker">Rendering</span>Conversions and generation</h2>
+
+  <h3>A long item is rejected</h3>
+  <p>Items over 290 seconds are split and converted in chunks automatically. The exception: items with a modified playrate or take FX cannot be auto-chunked - glue or render the item first (<span class="ui">Item</span> &rarr; <span class="ui">Render items to new take</span>), then convert.</p>
+
+  <h3>Rate limit errors (HTTP 429)</h3>
+  <p>Handled automatically: Reasonate retries with increasing delays (1 s / 2 s / 4 s). If a job still fails, the footer chip and the mode's status line show a <span class="ui">Retry</span> button. Persistent 429s usually mean the plan's concurrency limit - lower the concurrency in Settings or let the batch finish at its own pace.</p>
+
+  <h3>Everything re-rendered once after an update</h3>
+  <p>Reasonate occasionally changes its cache fingerprint format between versions. The first identical render after such an update is a paid miss; from then on caching works as before. One-time cost, announced in release notes.</p>
+
+  <h3>Dialogue line patch refuses to apply</h3>
+  <p>Line patching maps panel lines to the last generated take by order. If you added, removed or reordered lines since that Generate, the mapping would be wrong, so Reasonate declines - re-generate the whole dialogue instead. Editing only the text of lines is fine.</p>
+
+  <h3>A quota error mid-batch</h3>
+  <p>The header usage bar is your early warning. Cancelled or failed jobs are not charged; finished chunks stay cached, so topping up and re-running only pays for what is missing.</p>
+</section>
+
+<section id="projects">
+  <h2><span class="kicker">Files</span>Projects and files on disk</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Location</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td><code>&lt;project&gt;/reasonate_cache/</code></td><td>Converted audio for this project. Travels with the project folder; safe to delete (re-renders are paid).</td></tr>
+      <tr><td><code>&lt;project&gt;/reasonate_projects/</code></td><td>Dubbing project data and the Cast Registry (small JSON files). Keep them with the project.</td></tr>
+      <tr><td>REAPER resource path <code>/Scripts/reasonate_tmp/</code></td><td>Shared caches (voice list, transcripts, TTS phrases, previews) and temporary job files. Old artifacts are swept automatically.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="dim">Moving a project to another machine? Take the project folder including <code>reasonate_cache/</code> and <code>reasonate_projects/</code> - your dub, cast and cache arrive intact.</p>
+</section>
+
+<section id="support">
+  <h2><span class="kicker">Humans</span>Getting help and supporting the project</h2>
+  <p>Found a bug or something confusing?</p>
+  <ol>
+    <li>Turn on <span class="ui">Diagnostic logging</span> (Settings &rarr; General), reproduce the problem, and open the REAPER console (<span class="ui">View</span> &rarr; <span class="ui">Show console output</span>) - the log usually names the culprit.</li>
+    <li>Report it on <a href="https://github.com/b451c/Reasonate/issues" target="_blank" rel="noopener">GitHub Issues</a> or in the REAPER forum thread, with the log, your OS, REAPER and ReaImGui versions, and what you clicked.</li>
+  </ol>
+  <p>Reasonate is built by one person. If it saves you time, the <span class="heart">&hearts;</span> button in the header (or the links below) buys the next development session a coffee.</p>
+  <figure class="shot narrow" style="max-width: 340px">
+    <img src="img/support-popup.png" alt="The heart button popup in the header with Ko-fi, Buy Me a Coffee and PayPal links" loading="lazy">
+    <figcaption>The &hearts; button in the header.</figcaption>
+  </figure>
+</section>
+
+<div class="pager">
+  <a class="prev" href="tips-costs.html"><span>Previous</span>Tips &amp; Costs</a>
+  <a class="next" href="index.html"><span>Next</span>Guide home</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#install">Installation &amp; startup</a>
+  <a href="#playback">Playback &amp; previews</a>
+  <a href="#conversions">Conversions &amp; generation</a>
+  <a href="#projects">Projects &amp; files</a>
+  <a href="#support">Help &amp; support</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice Replacement - Reasonate User Guide</title>
+<meta name="description" content="Swap the voice in an existing recording while keeping the performance. Assign voices per track, convert in batches, audition and generate variants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body data-accent="vr">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a class="active" href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Mode 02 - Voice Replacement</div>
+  <h1>Same performance,<br>different voice.</h1>
+  <p class="lede">Voice Replacement converts existing recordings to another voice using ElevenLabs speech-to-speech. Timing, phrasing and emotion stay; the voice changes. Perfect for recasting a narrator, anonymizing a speaker, or hearing your script in the voice you could not book.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<div class="facts">
+  <div><span class="k">Input</span><span class="v">Audio items on tracks</span></div>
+  <div><span class="k">Output</span><span class="v">[AI] track per source</span></div>
+  <div><span class="k">Engine</span><span class="v">ElevenLabs STS</span></div>
+  <div><span class="k">Batch</span><span class="v">3 conversions at a time</span></div>
+  <div><span class="k">Source audio</span><span class="v">Never modified</span></div>
+</div>
+
+<section id="workflow">
+  <h2><span class="kicker">Core workflow</span>From recording to new voice</h2>
+
+  <ol class="steps">
+    <li>
+      <strong>Give the track a voice</strong>
+      <p>Every track in the table has a <span class="ui">Pick voice...</span> button. It opens the voice picker: search, filter, star favorites, and press <span class="ui">&#9654;</span> to hear a preview. Double-click to assign.</p>
+      <p>Optionally type a <strong>role</strong> for the track (like "narrator" or "guest"). Roles power <span class="ui">Casts</span>: save the current role-to-voice mapping once, apply it to any future project with two clicks.</p>
+    </li>
+    <li>
+      <strong>Select items and convert</strong>
+      <p>Select one or more audio items in REAPER (Cmd+click for multiple), then press <span class="ui">Convert selected (N)</span> or <kbd>Cmd+Enter</kbd>. A confirmation dialog shows exactly what will happen first: total audio length, estimated cost, and which voices are used.</p>
+    </li>
+    <li>
+      <strong>Let the batch run</strong>
+      <p>Conversions run in the background, three at a time. The interface stays responsive; progress lives in the batch dialog and in the footer activity chips. <span class="ui">Cancel</span> drops the queue but lets in-flight conversions finish, so you never pay for audio you do not receive.</p>
+    </li>
+    <li>
+      <strong>Audition and compare</strong>
+      <p>Click any item row and use the audition strip: <span class="ui">&#9654; Original</span> vs <span class="ui">&#9654; AI</span>. If an item has several takes, cycle them right there, or select the item in REAPER and press <kbd>Tab</kbd>.</p>
+    </li>
+  </ol>
+
+  <figure class="shot">
+    <img src="img/vr-batch-confirm-closeup.png" alt="Batch confirmation dialog showing total audio length, estimated API cost and the voices that will be used" loading="lazy">
+    <figcaption>Nothing is spent silently: the batch dialog shows duration, cost estimate and voices before you commit.</figcaption>
+  </figure>
+
+  <figure class="shot">
+    <img src="img/vr-converted.png" alt="REAPER timeline with the source item and the converted AI item on a child track, next to the Reasonate table showing the source track and its read-only AI output track" loading="lazy">
+    <figcaption>After conversion: the AI take lands on a linked child track. The source item is untouched.</figcaption>
+  </figure>
+
+  <div class="callout">
+    <span class="label">Non-destructive</span>
+    <p>Output goes to a separate <strong>[AI] track</strong>, created as a folder child of the source track (a flat layout is available in <a href="settings.html">Settings</a>). The [AI] rows in the table are read-only on purpose - they always tell you which source they belong to.</p>
+  </div>
+</section>
+
+<section id="reconvert">
+  <h2><span class="kicker">Iterating</span>Re-convert, variants, takes</h2>
+  <p>Reasonate tracks what each conversion was made from. If you convert the same item again with the same voice and settings, it is a free cache hit and gets skipped. Change the voice, the item audio or the voice settings, and it re-renders - the new result is <strong>appended as a new take</strong>, so nothing you liked is lost.</p>
+  <h3>Variants</h3>
+  <p>Want options? Select one item and press <span class="ui">Variants...</span>. Reasonate renders N takes (you choose how many) with different random seeds; each take is a slightly different read. Cycle takes with <kbd>Tab</kbd> and keep the winner.</p>
+  <h3>Per-track voice settings</h3>
+  <p>The <span class="ui">...</span> menu on each track opens <span class="ui">Voice settings</span>: stability, similarity, style and speaker boost overrides for that track only. Useful when one voice needs a steadier read than the rest.</p>
+</section>
+
+<section id="voices">
+  <h2><span class="kicker">Your library</span>Finding and managing voices</h2>
+  <h3>Voice picker</h3>
+  <p>Wherever you assign a voice - a track's <span class="ui">Pick voice...</span>, a TTS speaker, a dubbing character - the same picker opens: search, gender / accent / category filters, star favorites (with a favorites-only filter), and <span class="ui">Play</span> previews. Double-click a name to apply it.</p>
+  <figure class="shot narrow">
+    <img src="img/voices-picker.png" alt="Pick voice modal with search, gender, accent and category filters, favorites column and Play preview per voice" loading="lazy">
+    <figcaption>One picker everywhere: search, filter, star, preview, double-click.</figcaption>
+  </figure>
+  <p>Two header tools keep your voice collection in shape, in every mode:</p>
+  <h3>Voice Library</h3>
+  <p><span class="ui">Library</span> browses the public ElevenLabs collection (thousands of voices) with search and filters for gender, age, language, category and use case. <span class="ui">Play</span> previews a voice; <span class="ui">Add</span> imports it into your account, where it immediately shows up in <span class="ui">Pick voice...</span> everywhere.</p>
+  <figure class="shot narrow">
+    <img src="img/voices-library.png" alt="Voice Library browser with search, filters and a paginated list of public voices with Play and Add buttons" loading="lazy">
+    <figcaption>The public library: filter, preview, import.</figcaption>
+  </figure>
+  <h3>Voice Manager</h3>
+  <p><span class="ui">Voice Manager</span> lists only voices you own - clones and imports - with rename, delete and batch delete. Dubbing and Repair create clones as you work, so a periodic cleanup keeps your voice slots free.</p>
+  <figure class="shot narrow">
+    <img src="img/voices-manager.png" alt="Voice Manager listing owned cloned voices with rename and delete actions and a batch delete button" loading="lazy">
+    <figcaption>Everything you own in one list - rename clones, delete leftovers.</figcaption>
+  </figure>
+</section>
+
+<section id="recording">
+  <h2><span class="kicker">Capture</span>Record straight into the workflow</h2>
+  <p>You can record source material without leaving Reasonate. In a track's <span class="ui">...</span> menu choose <span class="ui">&#9679; Record</span>: the track arms, an input meter appears in the row, and an optional pre-roll counts you in. Press stop, and the fresh item is ready to convert.</p>
+  <p class="dim">Input, pre-roll length and monitoring live in Settings &rarr; Voice Replacement.</p>
+</section>
+
+<section id="isolator">
+  <h2><span class="kicker">Cleanup</span>Voice Isolator</h2>
+  <p>Noisy source? Two options:</p>
+  <ul>
+    <li><strong>Per track</strong> - toggle <span class="ui">Voice Isolator</span> in the track's <span class="ui">...</span> menu. Every conversion on that track first strips background noise, then converts the cleaned audio. The row shows a small dot when active.</li>
+    <li><strong>One-off</strong> - the <span class="ui">Clean voice</span> button in the audition strip runs the isolator on the selected item without converting anything, so you can hear the cleanup by itself.</li>
+  </ul>
+  <div class="callout cost">
+    <span class="label">Cost</span>
+    <p>Voice Isolator is a separate ElevenLabs call (1000 credits per minute of audio). Its results are cached like everything else, so re-running a conversion does not clean the same audio twice.</p>
+  </div>
+</section>
+
+<section id="long-items">
+  <h2><span class="kicker">Edge cases</span>Long items and limits</h2>
+  <p>ElevenLabs speech-to-speech accepts up to 5 minutes per call. Longer items are handled for you: Reasonate splits them at silences, converts the chunks, and lays the results out as a grouped set of items that plays seamlessly. If you re-convert, finished chunks come from cache and only missing ones are rendered.</p>
+  <p class="dim">Items over 290 seconds with a modified playrate or take FX cannot be auto-chunked yet and are rejected with a clear message.</p>
+</section>
+
+<section id="organizing">
+  <h2><span class="kicker">Bigger sessions</span>Roles, filters, colors</h2>
+  <ul>
+    <li><strong>Filter bar</strong> - with several roles or six plus tracks, chips with role counts and a search box appear above the table. Filtering never hides anything silently: a caption always says "showing N of M".</li>
+    <li><strong>Status colors</strong> - items are tinted by state (queued, converting, done, error...) so a glance at the timeline tells you where the batch is. Pick your own colors anytime; Reasonate respects manual colors and stops auto-tinting that item.</li>
+    <li><strong>Stats strip</strong> - the row above the table counts tracks, voiced tracks and items, with status pills for anything pending or failed.</li>
+  </ul>
+</section>
+
+<div class="pager">
+  <a class="prev" href="index.html"><span>Previous</span>Guide home</a>
+  <a class="next" href="tts.html"><span>Next</span>TTS - text to speech</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#workflow">Core workflow</a>
+  <a href="#reconvert">Re-convert &amp; variants</a>
+  <a href="#voices">Finding &amp; managing voices</a>
+  <a href="#recording">Recording</a>
+  <a href="#isolator">Voice Isolator</a>
+  <a href="#long-items">Long items</a>
+  <a href="#organizing">Roles &amp; filters</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

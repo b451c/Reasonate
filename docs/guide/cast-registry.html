@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cast Registry - Reasonate User Guide</title>
+<meta name="description" content="One cast across all modes: the project Cast Registry remembers your characters, their descriptions and their voices per language, including trained clones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a class="active" href="cast-registry.html">Cast Registry</a>
+      <a href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Cross-mode - Cast Registry</div>
+  <h1>Cast a character once.<br>Use them everywhere.</h1>
+  <p class="lede">The Cast Registry is your project's memory for people: character names, descriptions, assigned voices per language, and trained voice clones. Build it in one mode, and the others already know your cast.</p>
+</header>
+
+<main class="page">
+
+<section id="what">
+  <h2><span class="kicker">The idea</span>What it remembers</h2>
+  <p>Each REAPER project carries one registry. For every character it stores:</p>
+  <ul>
+    <li>the <strong>name</strong> (label) and an optional <strong>description</strong> ("the skeptical detective, dry delivery"),</li>
+    <li>a <strong>voice per language</strong> - the English voice, the Spanish voice, and so on,</li>
+    <li>the character's <strong>voice clone</strong>, if you trained one from their real recording,</li>
+    <li>links between the character and the speakers detected in your source material.</li>
+  </ul>
+  <p class="dim">The registry lives in a small JSON file in <code>reasonate_projects/</code> next to your .rpp, so it travels with the project when you move or archive it.</p>
+</section>
+
+<section id="flows">
+  <h2><span class="kicker">In practice</span>How modes feed and use it</h2>
+
+  <h3>Dubbing fills it automatically</h3>
+  <p>Casting voices in a dubbing project writes characters, descriptions (from the glossary) and voices to the registry as you work. Nothing to manage by hand.</p>
+
+  <h3>Repair names the speakers</h3>
+  <p>When you name detected speakers in Repair or train a clone for one, the registry learns it. Select the same material tomorrow and the names are back; other items of the same recording inherit the labels too.</p>
+
+  <h3>TTS pulls the cast in</h3>
+  <p>In the dialogue sub-mode, <span class="ui">Cast from project</span> loads registry characters as your speaker lineup - voices, names and descriptions included (descriptions show as tooltips on the speaker chips).</p>
+
+  <h3>Dubbing matches back</h3>
+  <p>Start dubbing material whose characters the registry already knows, and a <span class="ui">Match cast (N)</span> button proposes voices for them. You review the suggestions in a modal - each row shows current vs registry voice, and only what you check gets applied.</p>
+
+  <h3>Repair suggests the right voice</h3>
+  <p>Editing words spoken by a character whose registry voice differs from what Repair would use? A hint appears: "Selected words are spoken by X" with a one-click <span class="ui">Use X's voice</span>.</p>
+
+  <h3>New dub languages inherit</h3>
+  <p>Add a new target language to a dubbing project and the cast is copied over from a configured language quietly, with a status note. You only adjust where the new language needs a different voice.</p>
+</section>
+
+<section id="tips">
+  <h2><span class="kicker">Good habits</span>Getting the most out of it</h2>
+  <ul>
+    <li><strong>Name your speakers.</strong> Unnamed speakers ("Speaker 1") stay local to their item; named characters become portable across the project.</li>
+    <li><strong>Rename fearlessly.</strong> Renaming a character merges cleanly if the name already exists - voices and links are combined, nothing is lost.</li>
+    <li><strong>Descriptions pay off in Dubbing.</strong> The translator sees them, and they ride along into TTS tooltips.</li>
+  </ul>
+</section>
+
+<div class="pager">
+  <a class="prev" href="sfx-music.html"><span>Previous</span>SFX &amp; Music</a>
+  <a class="next" href="settings.html"><span>Next</span>Settings</a>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

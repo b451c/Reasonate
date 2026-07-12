@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings - Reasonate User Guide</title>
+<meta name="description" content="Reference for every Reasonate settings tab: API keys, cache, AI providers, TTS, Voice Replacement, Repair and Dubbing defaults.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">Reasonate<span class="guide-tag">User Guide</span></a>
+    <div class="nav-links">
+      <a href="tts.html"><span class="dot dot-tts"></span>TTS</a>
+      <a href="voice-replacement.html"><span class="dot dot-vr"></span>Voice Replacement</a>
+      <a href="dubbing.html"><span class="dot dot-dubbing"></span>Dubbing</a>
+      <a href="repair.html"><span class="dot dot-repair"></span>Repair</a>
+      <a href="sfx-music.html"><span class="dot dot-sfx"></span>SFX &amp; Music</a>
+      <a href="cast-registry.html">Cast Registry</a>
+      <a class="active" href="settings.html">Settings</a>
+      <a href="tips-costs.html">Tips &amp; Costs</a>
+      <a href="troubleshooting.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="crumb">Reference - Settings</div>
+  <h1>Every switch,<br>explained.</h1>
+  <p class="lede">Open Settings with the header button or <kbd>Cmd+,</kbd>. Six tabs: General, AI, TTS, Voice Replacement, Repair and Dubbing. This page is a reference - the mode chapters explain when and why to use each option.</p>
+</header>
+
+<main class="page with-toc">
+<div>
+
+<section id="general">
+  <h2><span class="kicker">Tab 1</span>General</h2>
+  <figure class="shot narrow">
+    <img src="img/settings-general.png" alt="Settings General tab: API key with Test and Save buttons, cache statistics and size limit, appearance and diagnostics toggles, About section with support buttons" loading="lazy">
+    <figcaption>General: key, cache, appearance, About.</figcaption>
+  </figure>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>ElevenLabs API key</td><td><span class="ui">Test connection</span> verifies the key; <span class="ui">Save &amp; fetch voices</span> stores it and loads your voice library. The key lives in REAPER's local settings - never in project files.</td></tr>
+      <tr><td>Cache</td><td>Shows the current project's cache (file count, size, location). <strong>Cache size limit (GB)</strong> caps it - oldest unused files are evicted first; 0 means unlimited. <span class="ui">Clear cache</span> wipes it (next renders will be paid fresh calls).</td></tr>
+      <tr><td>Decorative background</td><td>The subtle gradient behind the interface. Turn off for a flat look.</td></tr>
+      <tr><td>Diagnostic logging</td><td>Writes technical details to the REAPER console. Leave off unless you are chasing a problem (see <a href="troubleshooting.html">Help</a>).</td></tr>
+      <tr><td>About</td><td>Version, license, the support links (also under the <span class="heart">&hearts;</span> button in the header) and <span class="ui">Check for updates</span> - compares your version against the latest release and links to the releases page. Reasonate also checks quietly once a day and shows a small note in the header when an update exists; it never interrupts you with popups, and installing updates stays in ReaPack's hands.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="ai">
+  <h2><span class="kicker">Tab 2</span>AI</h2>
+  <figure class="shot narrow">
+    <img src="img/settings-ai.png" alt="Settings AI tab: provider override, six LLM provider sections with API key and model, and per-feature model overrides" loading="lazy">
+    <figcaption>AI: your LLM keys and which feature uses which model.</figcaption>
+  </figure>
+  <p>Three features use a large language model: Dubbing translation, TTS Enhance and SFX scene analysis. They all run on <strong>your own keys</strong>.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Provider override</td><td>Which configured provider is the default. <em>Auto</em> picks the first one with a key.</td></tr>
+      <tr><td>Provider sections</td><td>Anthropic Claude, OpenAI, Google Gemini, DeepSeek, xAI Grok and Mistral (EU) - paste a key, press <span class="ui">Test</span> to verify it (a free check, no tokens spent), pick a model. Configure one or several.</td></tr>
+      <tr><td>Per-feature model</td><td>Give each feature its own provider and model (for example: a top model for dubbing translation, a cheap one for SFX ideas). <em>Default</em> follows the global provider.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="dim">Keys are stored like the ElevenLabs key: locally, never in project files, and passed to the network layer via protected files rather than command lines.</p>
+</section>
+
+<section id="tts-tab">
+  <h2><span class="kicker">Tab 3</span>TTS</h2>
+  <figure class="shot narrow">
+    <img src="img/settings-tts.png" alt="Settings TTS tab: advance cursor toggle, dialogue split per speaker, output format and all-time character counter" loading="lazy">
+    <figcaption>TTS: cursor behavior, output format, billing counter.</figcaption>
+  </figure>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Advance edit cursor</td><td>After Generate, jump the REAPER cursor to the end of the new item - write, generate, keep writing.</td></tr>
+      <tr><td>Split into per-speaker tracks</td><td>After a dialogue Generate, detect the speakers in the result and lay each on its own track (one extra speech-to-text call per Generate).</td></tr>
+      <tr><td>Output format</td><td>MP3 44.1 kHz at 128 or 192 kbps, or uncompressed PCM (higher tiers). Applies to TTS renders.</td></tr>
+      <tr><td>Billing counter</td><td>All-time TTS characters generated, with a reset button. Cache hits are not counted - they are free.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="vr-tab">
+  <h2><span class="kicker">Tab 4</span>Voice Replacement</h2>
+  <figure class="shot narrow">
+    <img src="img/settings-vr.png" alt="Settings Voice Replacement tab: output layout selector and recording options for input channel, pre-roll and monitoring" loading="lazy">
+    <figcaption>Voice Replacement: where AI tracks go, how recording behaves.</figcaption>
+  </figure>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Output layout</td><td><em>Folder child</em> nests the [AI] track inside the source track's folder (default); <em>flat sibling</em> puts it next to the source. A migrate button converts old projects to the folder layout.</td></tr>
+      <tr><td>Recording</td><td>Input channel (mono 1 / mono 2 / stereo), pre-roll countdown (0-5 s) and input monitoring for the in-panel <span class="ui">&#9679; Record</span> feature.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="repair-tab">
+  <h2><span class="kicker">Tab 5</span>Repair</h2>
+  <figure class="shot narrow">
+    <img src="img/settings-repair.png" alt="Settings Repair tab: auto-match speaker pace toggle and ripple all tracks toggle, each with an explanation" loading="lazy">
+    <figcaption>Repair: pacing and timeline shifting.</figcaption>
+  </figure>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Auto-match speaker pace</td><td>Off by default: the voice and sentence decide the pacing naturally, and you can nudge speed manually per edit. On: Reasonate measures the take's pace and generates to match, keeping the better of two renders.</td></tr>
+      <tr><td>Ripple all tracks</td><td>When an edit changes the item's length, shift downstream material on <em>all</em> tracks (on) or only the edited track (off, default - safe when other tracks are not synced to the dialogue).</td></tr>
+    </tbody>
+  </table></div>
+  <p class="dim">Loudness matching is always on - patches are level-matched to the surrounding words automatically.</p>
+</section>
+
+<section id="dubbing-tab">
+  <h2><span class="kicker">Tab 6</span>Dubbing</h2>
+  <figure class="shot narrow">
+    <img src="img/settings-dubbing.png" alt="Settings Dubbing tab: default TTS model and style preset, dub track placement, speaker separation, alignment and stretching toggles, prompt caching and cost alert threshold" loading="lazy">
+    <figcaption>Dubbing: project defaults and timing behavior.</figcaption>
+  </figure>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Default TTS model / style preset</td><td>Prefills the Start Project modal.</td></tr>
+      <tr><td>Dub track placement</td><td>Dub tracks as folder children of the source, or as flat tracks below it (source fader then does not affect the dubs). Applies to newly created tracks.</td></tr>
+      <tr><td>Speaker separation</td><td>How eagerly speaker detection decides "this is a different person". Leave on auto unless detection merges or splits people.</td></tr>
+      <tr><td>Auto-run Forced Alignment</td><td>After each Generate Dub, compute per-word timing of the result (needed for per-word lip-sync and precise playback mapping).</td></tr>
+      <tr><td>Voice Isolator pre-clean</td><td>Default state of the pre-clean option for new projects.</td></tr>
+      <tr><td>Stretch dub items to segment span</td><td>Fit each dub item into its original segment's slot to prevent overlap, with a bypass for very short segments.</td></tr>
+      <tr><td>Per-word lip-sync</td><td>Experimental: elastic stretch markers align each word to the original word timing.</td></tr>
+      <tr><td>Sliding context window</td><td>The translator sees neighboring segments (2 previous + 1 next) for coherent phrasing across cuts.</td></tr>
+      <tr><td>Anthropic prompt caching</td><td>90% off repeated context when translating with Claude. Keep it on.</td></tr>
+      <tr><td>Cost alert threshold</td><td>Generate Dub asks for confirmation when the projected spend crosses this amount.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<div class="pager">
+  <a class="prev" href="cast-registry.html"><span>Previous</span>Cast Registry</a>
+  <a class="next" href="tips-costs.html"><span>Next</span>Tips &amp; Costs</a>
+</div>
+
+</div>
+
+<aside class="toc">
+  <div class="toc-title">On this page</div>
+  <a href="#general">General</a>
+  <a href="#ai">AI</a>
+  <a href="#tts-tab">TTS</a>
+  <a href="#vr-tab">Voice Replacement</a>
+  <a href="#repair-tab">Repair</a>
+  <a href="#dubbing-tab">Dubbing</a>
+</aside>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Reasonate 1.0 - made for REAPER by falami.studio (b4s1c).</div>
+    <div class="support">
+      <span class="heart">&hearts;</span>
+      <a href="https://ko-fi.com/quickmd" target="_blank" rel="noopener">Ko-fi</a>
+      <a href="https://buymeacoffee.com/bsroczynskh" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      <a href="https://paypal.me/b451c" target="_blank" rel="noopener">PayPal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
