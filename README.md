@@ -20,6 +20,8 @@ No external runtime: REAPER's built-in Lua 5.4, `curl`, and your API keys.
 reference, costs, troubleshooting) at
 **[b451c.github.io/Reasonate/guide](https://b451c.github.io/Reasonate/guide/)**
 (source in [`docs/guide/`](docs/guide/index.html)).
+Questions and feedback: [REAPER forum thread](https://forum.cockos.com/showthread.php?t=310070)
+or [GitHub Issues](https://github.com/b451c/Reasonate/issues).
 
 ## The five modes
 
