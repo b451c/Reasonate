@@ -1,5 +1,7 @@
 # Reasonate
 
+![Reasonate - five AI voice tools, one REAPER window](docs/guide/img/reasonate-banner-1280.png)
+
 AI audio production toolkit for [REAPER](https://www.reaper.fm), built on the
 [ElevenLabs](https://elevenlabs.io) API. Replace voices in recorded dialogue,
 generate speech and multi-speaker conversations, dub material into other
@@ -61,6 +63,28 @@ and colors), every insert/convert is wrapped in an undo block, and all
 generated audio is cached deterministically (repeating an identical request
 is free).
 
+## Screenshots
+
+*Voice Replacement - source untouched, the AI take lands on a linked child track:*
+![Voice Replacement](docs/guide/img/vr-converted.png)
+
+*Dubbing - a Spanish dub generated and fitted to the original timing:*
+![Dubbing](docs/guide/img/dubbing-dubbed.png)
+
+*Repair - click a word in the transcript, type the fix, apply:*
+![Repair](docs/guide/img/repair-replace.png)
+
+*SFX & Music - a complete sound package proposed from scene analysis:*
+![SFX and Music](docs/guide/img/sfx-from-scene.png)
+
+More (all five modes, step by step) in the
+[user guide](https://b451c.github.io/Reasonate/guide/).
+
+## Demo videos
+
+- [Dubbing demo](https://github.com/b451c/Reasonate/releases/download/v1.0.0/reasonate-dubbing-demo.mp4) - one podcast in, another language out, on the timeline
+- [Repair demo](https://github.com/b451c/Reasonate/releases/download/v1.0.0/reasonate-repair-demo.mp4) - fixing recorded words directly in the take
+
 ## Requirements
 
 - REAPER ≥ 7.0 (tested on 7.71, macOS arm64)
@@ -121,8 +145,7 @@ voice-changer-reaper/
 ├── scripts/                 ← quality gate: check.sh (syntax + luacheck +
 │                              UI-English scan + headless tests) + git hook
 ├── tests/                   ← headless unit tests (lua5.4 tests/run.lua)
-├── docs/guide/              ← the illustrated user guide (GitHub Pages)
-└── reference/               ← API cheat-sheets (ElevenLabs curl, ReaImGui)
+└── docs/guide/              ← the illustrated user guide (GitHub Pages)
 ```
 
 ## Development
@@ -132,8 +155,7 @@ voice-changer-reaper/
   tests). Install it as a pre-commit hook with `sh scripts/install_hooks.sh`.
 - Tests run without REAPER: `lua5.4 tests/run.lua` (a minimal REAPER stub is
   vendored in `tests/reaper_stub.lua`).
-- Code and all UI strings are English; some internal notes in `reference/`
-  are in Polish.
+- Code and all UI strings are English.
 - Known limitations and troubleshooting live in the
   [user guide](docs/guide/troubleshooting.html).
 
