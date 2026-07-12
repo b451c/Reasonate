@@ -82,8 +82,10 @@ More (all five modes, step by step) in the
 
 ## Demo videos
 
-- [Dubbing demo](https://github.com/b451c/Reasonate/releases/download/v1.0.0/reasonate-dubbing-demo.mp4) - one podcast in, another language out, on the timeline
-- [Repair demo](https://github.com/b451c/Reasonate/releases/download/v1.0.0/reasonate-repair-demo.mp4) - fixing recorded words directly in the take
+- [Dubbing demo](https://b451c.github.io/Reasonate/guide/dubbing.html) - one podcast in, another language out, on the timeline (plays in the guide)
+- [Repair demo](https://b451c.github.io/Reasonate/guide/repair.html) - fixing recorded words directly in the take (plays in the guide)
+
+Direct downloads on the [release page](https://github.com/b451c/Reasonate/releases/tag/v1.0.0).
 
 ## Requirements
 
